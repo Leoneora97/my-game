@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprøgli Adventure</title>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.js"></script>
+</head>
+<body>
+  <script>
+    // Phaser game configuration
+    const config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      scene: {
+        preload: preload,
+        create: create,
+        update: update
+      }
+    };
+
+    // Create the game instance
+    const game = new Phaser.Game(config);
+
+    // Variable to store the sprite
+    let player;
+
+    function preload() {
+      // Load your player sprite here (adjust the path if needed)
+      this.load.image('player', 'assets/player.png');  // Replace with your sprite file
+    }
+
+    function create() {
+      // Create the player sprite in the center of the screen
+      player = this.physics.add.sprite(400, 300, 'player');
+      player.setCollideWorldBounds(true);  // Prevent the player from going out of bounds
+    }
+
+    function update() {
+      // Movement logic: Check for key presses and move the sprite
+      if (this.input.keyboard.isDown(Phaser.Input.Keyboard.KeyCodes.RIGHT)) {
+        player.x += 5;  // Move right by 5 pixels
+      } 
+      if (this.input.keyboard.isDown(Phaser.Input.Keyboard.KeyCodes.LEFT)) {
+        player.x -= 5;  // Move left by 5 pixels
+      }
+
+      if (this.input.keyboard.isDown(Phaser.Input.Keyboard.KeyCodes.UP)) {
+        player.y -= 5;  // Move up by 5 pixels
+      }
+
+      if (this.input.keyboard.isDown(Phaser.Input.Keyboard.KeyCodes.DOWN)) {
+        player.y += 5;  // Move down by 5 pixels
+      }
+    }
+  </script>
+</body>
+</html>
